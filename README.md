@@ -2,7 +2,7 @@
 A select dropdown that accepts value-text pair.
 
 Here is an example column defined in javascript:
-
+```javascript
 { data: 'Employee.id', /* the key you want the selection to happen on.*/
   type: "selectDropdown",
   title: "Employee"  ,  
@@ -12,3 +12,5 @@ Here is an example column defined in javascript:
                    { Value: "04E0D9A9-2F94-4A31-98FA-8AFF0D900A7E", Text: "David Smith"}
                   ] /* the selectOption is an array of Value-Text objects */
 }
+```
+
