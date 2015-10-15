@@ -1,16 +1,41 @@
 # select-dropdown-handsontable-extension
 A select dropdown that accepts value-text pair.
 
-Here is an example column defined in javascript:
+This works best with Handsontable 0.12 version.
+
+Suppose the data source is something like:
 ```javascript
-{ data: 'Employee.id', /* the key you want the selection to happen on.*/
-  type: "selectDropdown",
-  title: "Employee"  ,  
-  selectOptions: [ 
-                   { Value: "E58E7B63-D4E5-4B06-88B6-AF82B4346C90", Text: "John Smith"},
-                   { Value: "DCB70E47-81ED-4ECD-9332-6245CC04B0B6", Text: "Kevin Smith"} ,
-                   { Value: "04E0D9A9-2F94-4A31-98FA-8AFF0D900A7E", Text: "David Smith"}
-                  ] /* the selectOption is an array of Value-Text objects */
-}
+    [
+      { id: 1, role: 'IT', Employee { id: 222, SSN: 344-23-0000 }, code: 3333  },
+      { id: 2, role: 'Sales', Employee { id: 333, SSN: 344-23-0001 }, code: 4444  },
+      { id: 3, role: 'IT Manager', Employee { id: 444, SSN: 344-23-0002 }, code: 5555  },
+      { id: 4, role: 'Security', Employee { id: 555, SSN: 344-23-0004 }, code: 6666  }
+
+    ]
 ```
 
+
+Example column schema for a selectDropdown type column:
+```javascript
+        { 
+          title: "Employee Name"  ,
+          data: 'employee.id', /* the key you want the selection to happen on.*/
+          type: "selectDropdown",  /* this is the new type provided by this extension */ 
+          selectOptions: dropdownLists.employeesList, /* The dropdown list as is */
+          valueField: "EmployeeId", /* the field in data.employeesList that we get the option value from */
+          textField: "EmployeeName",  /* the field in data.employeesList that we get the option text from */
+          allowNull: true, /* if set to true, it will add an empty option to select from */
+          width: 310
+        }
+```
+
+Where dropdownLists.employeesList would be something like: 
+```javascript
+dropdownLists.employeesList = [
+  { EmployeeId: 1, EmployeeName: 'David', SSN: 123-45-6789  },
+  { EmployeeId: 2, EmployeeName: 'Jorge', SSN: 133-45-6789  },
+  { EmployeeId: 3, EmployeeName: 'Alex', SSN: 153-45-6789  },
+  { EmployeeId: 4, EmployeeName: 'Chelsea', SSN: 163-45-6789  },
+  { EmployeeId: 5, EmployeeName: 'Sean', SSN: 173-45-6789  },
+]
+```
